@@ -1,0 +1,23 @@
+import express from 'express';
+import cors from 'cors';
+import authRoutes from './auth.ts';
+import users from './users.ts'
+
+const app = express();
+const PORT = process.env.PORT || 3001;
+
+app.use(cors({
+    origin: 'http://localhost:5173'
+}))
+
+app.get('/', (req, res) => {
+  res.json({ message: 'Volleyball API ready', endpoints: ['/api/auth/register', '/api/auth/login'] });
+});
+
+app.use(express.json());
+
+app.use('/api/auth', authRoutes);
+app.use('/api/users', users)
+app.listen(PORT, () => {
+    console.log(`Сервер успешно запущен на http://localhost/${PORT}`)
+})
