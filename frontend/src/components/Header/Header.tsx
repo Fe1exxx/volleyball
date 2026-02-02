@@ -9,7 +9,7 @@ export default function Header() {
   const { isLoggedIn } = useAuthStore();
 
   return (
-    <header className={`${visible ? 'h-70' : 'h-22'} ${visible && isLoggedIn ? 'h-[233px] transition-all' : 'h-22'} bg-amber-600/90 top-0 sm:h-22 z-50 transition-all`}>
+    <header className={`${visible ? 'h-58' : 'h-22'} ${visible && isLoggedIn ? 'h-[233px] transition-all' : 'h-22'} bg-amber-600/90 top-0 sm:h-22 z-50 transition-all`}>
       
       {/* Верхняя панель */}
       <nav className="flex justify-between items-center px-4 sm:px-6 max-w-400 m-auto">
@@ -22,8 +22,8 @@ export default function Header() {
         {/* Меню для расширенных устройств */}
         <nav>
           <ul className='hidden sm:flex gap-10  h-15 items-center'>
-            <li className='hover:scale-110 duration-200 transition-all cursor-pointer text-[18px] md:text-xl hover:text-amber-400'><Link to='/' >Главная</Link></li>
-            <li className='hover:scale-110 duration-200 transition-all cursor-pointer text-[18px] md:text-xl hover:text-amber-400'><Link to='/abonement'>Абонемент</Link></li>
+            <li className='hover:scale-110 duration-200 transition-all cursor-pointer sm:text-2xl md:text-3xl hover:text-amber-400'><Link to='/' >Главная</Link></li>
+            <li className='hover:scale-110 duration-200 transition-all cursor-pointer sm:text-2xl md:text-3xl hover:text-amber-400'><Link to='/abonement'>Абонемент</Link></li>
             {isLoggedIn ?
 
               <Link to='/authorization' className="block" onClick={() => setVisible(!visible)}>
@@ -33,7 +33,6 @@ export default function Header() {
               : (
                 <>
                   <li><Link to='/authorization' className='cursor-pointer text-[18px] md:text-xl hover:text-amber-400 transition-colors duration-200'>Войти</Link></li>
-                  <li><Link to='/registration' className='cursor-pointer text-[18px] md:text-xl hover:text-amber-400 transition-colors duration-200'>Зарегистрироваться</Link></li>
                 </>
               )}
           </ul>
@@ -60,7 +59,6 @@ export default function Header() {
               :
               <>
                 <li><Link to='/authorization' className="block w-full text-left px-3 py-3 border-b border-black cursor-pointer bg-indigo-700 hover:bg-indigo-800 text-white" onClick={() => setVisible(!visible)}>Войти</Link></li>
-                <li><Link to='/registration' className="block w-full text-left px-3 py-3 border-b border-black cursor-pointer bg-amber-500 hover:bg-amber-600" onClick={() => setVisible(!visible)}>Зарегистрироваться</Link></li>
               </>
           }
 

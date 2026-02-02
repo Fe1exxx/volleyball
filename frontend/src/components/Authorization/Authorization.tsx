@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
-import { useAuthStore } from '../GlobalSetZustand/authStore'; 
+import { useAuthStore } from '../GlobalSetZustand/authStore';
 import { Link } from 'react-router-dom';
+import { Eye, EyeOff } from 'lucide-react';
 
 export default function Authorization() {
   const { isLoggedIn, loading, error, login, logout, loadUsers, users } = useAuthStore();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const passwordRef = useRef<HTMLInputElement>(null);
 
@@ -96,16 +98,24 @@ export default function Authorization() {
             />
           </div>
 
-          <div className="mb-6">
+          <div className="mb-6 relative">
             <input
               ref={passwordRef}
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Пароль"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              className="w-full p-3 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
               required
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer hover:text-gray-700 focus:outline-none"
+              aria-label={showPassword ? "Скрыть пароль" : "Показать пароль"}
+            >
+              {showPassword ? <Eye /> : <EyeOff />}
+            </button>
           </div>
 
           <button

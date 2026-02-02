@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { useAuthStore } from '../GlobalSetZustand/authStore';
+import { Eye, EyeOff } from 'lucide-react';
 
 // Схема для регистрации
 const registerSchema = z.object({
@@ -26,6 +27,8 @@ export default function Registration() {
     const [errors, setErrors] = useState<Partial<Record<keyof RegisterData, string>>>({});
     const [isLoading, setIsLoading] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+
 
     const navigate = useNavigate();
     const { login } = useAuthStore(); // Для автовхода после регистрации
@@ -156,8 +159,8 @@ export default function Registration() {
                             value={formData.username}
                             onChange={handleChange}
                             className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 ${errors.username
-                                    ? 'border-red-500 focus:ring-red-500'
-                                    : 'border-gray-300 focus:ring-orange-500'
+                                ? 'border-red-500 focus:ring-red-500'
+                                : 'border-gray-300 focus:ring-orange-500'
                                 }`}
                             placeholder="Ваш никнейм"
                         />
@@ -175,30 +178,39 @@ export default function Registration() {
                             value={formData.email}
                             onChange={handleChange}
                             className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 ${errors.email
-                                    ? 'border-red-500 focus:ring-red-500'
-                                    : 'border-gray-300 focus:ring-orange-500'
+                                ? 'border-red-500 focus:ring-red-500'
+                                : 'border-gray-300 focus:ring-orange-500'
                                 }`}
                             placeholder="example@email.com"
                         />
                         {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
                     </div>
-
-                    <div>
+                    <div className="relative">
                         <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
                             Пароль
                         </label>
-                        <input
-                            id="password"
-                            name="password"
-                            type="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 ${errors.password
-                                    ? 'border-red-500 focus:ring-red-500'
-                                    : 'border-gray-300 focus:ring-orange-500'
-                                }`}
-                            placeholder="минимум 6 символов"
-                        />
+                        <div className="relative">
+                            <input
+                                id="password"
+                                name="password"
+                                type={showPassword ? 'text' : 'password'}
+                                value={formData.password}
+                                onChange={handleChange}
+                                className={`w-full px-4 py-3 pr-10 border rounded-lg focus:outline-none focus:ring-2 ${errors.password
+                                        ? 'border-red-500 focus:ring-red-500'
+                                        : 'border-gray-300 focus:ring-orange-500'
+                                    }`}
+                                placeholder="минимум 6 символов"
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword((prev) => !prev)}
+                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none cursor-pointer"
+                                aria-label={showPassword ? "Скрыть пароль" : "Показать пароль"}
+                            >
+                                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                            </button>
+                        </div>
                         {errors.password && <p className="mt-1 text-sm text-red-500">{errors.password}</p>}
                     </div>
 
@@ -213,8 +225,8 @@ export default function Registration() {
                             value={confirmPassword}
                             onChange={handleConfirmChange}
                             className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 ${errors.confirmPassword
-                                    ? 'border-red-500 focus:ring-red-500'
-                                    : 'border-gray-300 focus:ring-orange-500'
+                                ? 'border-red-500 focus:ring-red-500'
+                                : 'border-gray-300 focus:ring-orange-500'
                                 }`}
                             placeholder="..."
                         />
