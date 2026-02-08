@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { useAuthStore } from '../GlobalSetZustand/authStore';
+import { useAuthStore } from '../../GlobalSetZustand/authStore';
 import { Eye, EyeOff } from 'lucide-react';
 
 // Схема для регистрации
@@ -108,7 +108,7 @@ export default function Registration() {
 
             // Через 2 секунды перенаправляем на главную
             setTimeout(() => {
-                navigate('/'); // или куда нужно
+                navigate('/');
             }, 2000);
 
         } catch (err) {

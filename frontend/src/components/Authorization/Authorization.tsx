@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useAuthStore } from '../GlobalSetZustand/authStore';
+import { useAuthStore } from '../../GlobalSetZustand/authStore';
 import { Link } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 
