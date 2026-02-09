@@ -1,10 +1,21 @@
+// React use 
 import { useState, useEffect, useRef } from 'react';
+
+// Zustand
 import { useAuthStore } from '../../GlobalSetZustand/authStore';
+
+// React Router
 import { Link } from 'react-router-dom';
+
+// Lucide-react
 import { Eye, EyeOff } from 'lucide-react';
 
+// Components
+import UserMenu from '../UserAndAdmin/UserMenu';
+import AdminMenu from '../UserAndAdmin/AdminMenu'; 
+
 export default function Authorization() {
-  const { isLoggedIn, loading, error, login, logout, loadUsers, users } = useAuthStore();
+  const { isLoggedIn, loading, error, login, loadUsers, currentUser } = useAuthStore();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -44,37 +55,12 @@ export default function Authorization() {
     await login(email, password);
   };
 
-  if (isLoggedIn) {
-    return (
-      <div className="max-w-md mx-auto p-6 bg-white rounded-xl shadow-lg border border-orange-100 mt-10">
-        <div className="text-center py-8">
-          <h2 className="text-3xl font-oswald font-bold text-orange-600 mb-4">Добро пожаловать!</h2>
-          <p className="text-lg mb-6">
-            Вы вошли как <strong>{useAuthStore.getState().currentUser?.email}</strong>
-          </p>
-
-          <div className="mb-6">
-            <h3 className="font-bold text-gray-700 mb-2">Пользователи:</h3>
-            <ul className="bg-gray-50 p-3 rounded-lg max-h-40 overflow-y-auto">
-              {users.map(user => (
-                <li key={user.id} className="py-1 border-b border-gray-200 last:border-0">
-                  {user.username} ({user.email})
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <button
-            onClick={logout}
-            className="px-6 py-3 bg-gray-800 text-white rounded-lg font-bold hover:bg-gray-900 transition w-full"
-          >
-            Выйти из аккаунта
-          </button>
-        </div>
-      </div>
-    );
-  }
-
+  // Open Admin menu
+  if (isLoggedIn && currentUser?.role === 'admin') return <AdminMenu />
+  
+  //Open User menu
+  if (isLoggedIn && currentUser?.role === 'user') return <UserMenu />
+  
   return (
     <div className="max-w-md mx-auto p-6 h-[80vh] sm:flex items-center justify-center">
       <section className="w-full rounded-xl shadow-lg border border-orange-100 p-6 bg-white">

@@ -5,11 +5,8 @@ import { z } from 'zod';
 const userSchema = z.object({
   id: z.number(),
   username: z.string(),
-  email: z.string().email()
-});
-
-const usersResponseSchema = z.object({
-  users: z.array(userSchema)
+  email: z.string().email(),
+  role: z.enum(['user', 'admin']), // строгий enum
 });
 
 type User = z.infer<typeof userSchema>;
@@ -24,11 +21,12 @@ interface AuthState {
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
   loadUsers: () => Promise<void>;
+  isAdmin: () => boolean; // удобный геттер
 }
 
 export const useAuthStore = create<AuthState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       isLoggedIn: false,
       currentUser: null,
       users: [],
@@ -47,13 +45,16 @@ export const useAuthStore = create<AuthState>()(
           const data = await response.json();
 
           if (!response.ok) {
-            set({ error: data.error || 'Ошибка входа' });
+            set({ error: data.error || 'Ошибка входа', loading: false });
             return;
           }
 
+          // Валидация ответа
+          const user = userSchema.parse(data.user);
+          
           set({
             isLoggedIn: true,
-            currentUser: data.user, 
+            currentUser: user,
             loading: false
           });
         } catch (err) {
@@ -76,20 +77,22 @@ export const useAuthStore = create<AuthState>()(
           if (!response.ok) throw new Error('HTTP Error: ' + response.status);
 
           const rawData = await response.json();
-          const validatedData = usersResponseSchema.parse(rawData);
+          const users = z.array(userSchema).parse(rawData.users || rawData);
 
-          set({ users: validatedData.users });
+          set({ users });
         } catch (err) {
           set({ error: 'Ошибка загрузки пользователей' });
         }
-      }
+      },
+
+      isAdmin: () => get().currentUser?.role === 'admin',
     }),
     {
-      name: 'auth-storage', 
+      name: 'auth-storage',
       partialize: (state) => ({
         isLoggedIn: state.isLoggedIn,
         currentUser: state.currentUser
-      }) 
+      })
     }
   )
 );

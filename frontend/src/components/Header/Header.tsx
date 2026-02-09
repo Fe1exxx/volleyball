@@ -6,15 +6,21 @@ import { useState, useRef, useEffect } from 'react';
 import { useMenu } from '../../GlobalSetZustand/menuForAutorization';
 import { useAuthStore } from '../../GlobalSetZustand/authStore';
 
+// React-lucide
+import { Home, Tag, User } from 'lucide-react';
+
 // Images
 import logo from './logo.png';
 
 export default function Header() {
+
+  // State
   const [visible, setVisible] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const profileRef = useRef<HTMLButtonElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  
+
+  // Zustand - USE
   const { isLoggedIn, logout } = useAuthStore();
   const { changeStateOpen } = useMenu();
 
@@ -23,7 +29,7 @@ export default function Header() {
     function handleClickOutside(event: MouseEvent) {
       const target = event.target as Node;
       if (
-        profileRef.current && 
+        profileRef.current &&
         !profileRef.current.contains(target) &&
         dropdownRef.current &&
         !dropdownRef.current.contains(target)
@@ -31,14 +37,14 @@ export default function Header() {
         setProfileOpen(false);
       }
     }
-    
+
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   // Позиционирование dropdown под кнопкой
   const [dropdownStyle, setDropdownStyle] = useState({ top: 80, right: 0 });
-  
+
   useEffect(() => {
     if (profileOpen && profileRef.current) {
       const rect = profileRef.current.getBoundingClientRect();
@@ -65,26 +71,23 @@ export default function Header() {
           <nav>
             <ul className='hidden sm:flex gap-10 h-15 items-center'>
               <li className='hover:scale-110 duration-200 transition-all cursor-pointer sm:text-2xl md:text-3xl hover:text-amber-400'>
-                <Link to='/'>Главная</Link>
+                <Link to='/' className='flex items-center'>Главная <span className='ml-2 mt-2'>{<Home />}</span></Link>
               </li>
               <li className='hover:scale-110 duration-200 transition-all cursor-pointer sm:text-2xl md:text-3xl hover:text-amber-400'>
-                <Link to='/abonement'>Абонемент</Link>
+                <Link to='/abonement' className='flex items-center'>Абонемент <span className='ml-2 mt-2'>{<Tag />}</span></Link>
               </li>
-              
+
               {isLoggedIn ? (
-                <button 
+                <button
                   ref={profileRef}
                   onClick={() => {
                     setProfileOpen(!profileOpen);
                     changeStateOpen();
-                  }} 
+                  }}
                   className="block relative"
                 >
-                  <img 
-                    src="https://img.icons8.com/?size=100&id=12438&format=png&color=000000 " 
-                    alt="profile" 
-                    className={`w-11 hover:scale-110 transition-all ${profileOpen ? 'scale-110' : ''}`}
-                  />
+
+                  <div className={` hover:scale-210 transition-all ${profileOpen ? 'scale-210' : 'scale-170'}`}><User /></div>
                 </button>
               ) : (
                 <li className='hover:scale-110 duration-200 transition-all cursor-pointer sm:text-2xl md:text-3xl hover:text-amber-400'>
@@ -95,9 +98,9 @@ export default function Header() {
           </nav>
 
           {/* Кнопка бургер меню */}
-          <button 
-            aria-label={visible ? "Закрыть меню" : "Открыть меню"} 
-            className="sm:hidden z-10 cursor-pointer mr-2" 
+          <button
+            aria-label={visible ? "Закрыть меню" : "Открыть меню"}
+            className="sm:hidden z-10 cursor-pointer mr-2"
             onClick={() => setVisible(!visible)}
           >
             <div className="h-8 w-10">
@@ -108,15 +111,13 @@ export default function Header() {
           </button>
         </nav>
 
-        {/* Мобильное меню — плавное через max-height */}
-        <nav 
+        <nav
           className="sm:hidden opacity-95 overflow-hidden transition-all duration-300 ease-in-out"
           style={{
             maxHeight: visible ? '200px' : '0px',
             opacity: visible ? 1 : 0,
           }}
-          role="menu"
-        >
+          role="menu">
           <ul className="bg-amber-500 mt-1 mobile-ul">
             <li>
               <Link to='/' className='block w-full text-left px-3 py-3 border-b border-black cursor-pointer' onClick={() => setVisible(!visible)}>
@@ -130,9 +131,9 @@ export default function Header() {
             </li>
             {isLoggedIn ? (
               <li>
-                <Link 
-                  to={'/'} 
-                  className="block w-full text-left px-3 py-3 border-b border-black cursor-pointer bg-indigo-600 hover:bg-indigo-800 text-white" 
+                <Link
+                  to={'/'}
+                  className="block w-full text-left px-3 py-3 border-b border-black cursor-pointer bg-indigo-600 hover:bg-indigo-800 text-white"
                   onClick={() => {
                     setVisible(!visible);
                     logout();
@@ -143,11 +144,10 @@ export default function Header() {
               </li>
             ) : (
               <li>
-                <Link 
-                  to='/authorization' 
-                  className="block w-full text-left px-3 py-3 border-b border-black cursor-pointer bg-indigo-700 hover:bg-indigo-800 text-white" 
-                  onClick={() => setVisible(!visible)}
-                >
+                <Link
+                  to='/authorization'
+                  className="block w-full text-left px-3 py-3 border-b border-black cursor-pointer bg-indigo-700 hover:bg-indigo-800 text-white"
+                  onClick={() => setVisible(!visible)}>
                   Войти
                 </Link>
               </li>
@@ -168,18 +168,16 @@ export default function Header() {
           className={`
             w-48 bg-amber-500 rounded-lg shadow-lg overflow-hidden
             transform origin-top-right transition-all duration-200 ease-out
-            ${profileOpen 
-              ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto' 
+            ${profileOpen
+              ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto'
               : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'
             }
-          `}
-        >
+          `}>
           <div className="py-2">
-            <Link 
-              to="/authorization" 
+            <Link
+              to="/authorization"
               className="block px-4 py-3 hover:bg-amber-400 transition-colors text-black"
-              onClick={() => setProfileOpen(false)}
-            >
+              onClick={() => setProfileOpen(false)}>
               Профиль
             </Link>
             <button
@@ -187,8 +185,7 @@ export default function Header() {
                 setProfileOpen(false);
                 logout();
               }}
-              className="block w-full text-left px-4 py-3 hover:bg-amber-400 transition-colors text-black"
-            >
+              className="block w-full text-left px-4 py-3 hover:bg-amber-400 transition-colors text-black">
               Выйти с аккаунта
             </button>
           </div>
