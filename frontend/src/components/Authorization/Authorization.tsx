@@ -3,16 +3,19 @@ import { useAuthStore } from '../../GlobalSetZustand/authStore';
 
 // Components
 import UserMenu from '../UserAndAdmin/UserMenu';
-import AdminMenu from '../UserAndAdmin/AdminMenu';
+import AdminMenu from '../UserAndAdmin/AdminMenu'; 
 import Entrance from './Entrance';
 
 export default function Authorization() {
-  const { isLoggedIn, isAdmin } = useAuthStore(state => ({
-    isLoggedIn: state.isLoggedIn,
-    isAdmin: state.isAdmin()
-  }));
+  const { isLoggedIn, currentUser } = useAuthStore();
 
-  if (isLoggedIn && isAdmin) return <AdminMenu />;
-  if (isLoggedIn) return <UserMenu />;
-  return <Entrance />;
+  // Open Admin menu
+  if (isLoggedIn && currentUser?.role === 'admin') return <AdminMenu />
+  
+  //Open User menu
+  if (isLoggedIn && currentUser?.role === 'user') return <UserMenu />
+  
+
+  //Autorization menu
+  return <Entrance />
 }
