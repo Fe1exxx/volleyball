@@ -1,41 +1,89 @@
+import { useState } from 'react';
 import { useAuthStore } from '../../GlobalSetZustand/authStore';
 
 export default function AdminMenu() {
-    const { logout, users, isAdmin, currentUser } = useAuthStore();
+    const [open, setOpen] = useState(false);
+    const { currentUser, logout } = useAuthStore();
+
+    if (currentUser?.role !== 'admin') return null;
+
+    const menuItems = [
+        { label: 'Дашборд', href: '/dashboard', icon: '📊' },
+        { label: 'Пользователи', href: '/users', icon: '👥' },
+        { label: 'Настройки', href: '/settings', icon: '⚙️' },
+        { label: 'Выйти', href: '#', icon: '🚪', action: logout },
+    ];
 
     return (
-        <div className="max-w-md mx-auto p-6 bg-white rounded-xl shadow-lg border border-orange-100 mt-10">
-            <div className="text-center py-8">
-                <h2 className="text-3xl font-oswald font-bold text-orange-600 mb-4">Добро пожаловать Админ!</h2>
-                <p className="text-lg mb-2">
-                    Вы вошли как <strong>{currentUser?.email}</strong>
-                </p>
-                <p className="text-sm text-gray-600 mb-6">
-                    Роль: <span className='text-red-600 font-bold'>
-                        {currentUser?.role}
-                    </span>
-                </p>
-
-                {isAdmin() && (
-                    <div className="mb-6">
-                        <h3 className="font-bold text-gray-700 mb-2">Пользователи:</h3>
-                        <ul className="bg-gray-50 p-3 rounded-lg max-h-40 overflow-y-auto text-left">
-                            {users.map(user => (
-                                <li key={user.id} className="py-1 border-b border-gray-200 last:border-0 flex justify-between">
-                                    <span>{user.username}</span>
-                                    <span className="text-sm text-gray-500">{user.role}</span>
-                                </li>
-                            ))}
-                        </ul>
+        <section className="w-full max-w-7xl mx-auto mt-23">
+            <nav 
+                onClick={() => setOpen(!open)} 
+                className={`
+                    bg-linear-to-r from-amber-500 to-orange-500 
+                    cursor-pointer transition-all duration-500 ease-in-out
+                    hover:from-amber-600 hover:to-orange-600
+                    shadow-lg hover:shadow-xl m-2
+                    ${open ? "h-auto rounded-b-none" : "h-12 rounded-lg"}
+                `}
+            >
+                {/* ВЕРХНЯЯ ЧАСТЬ: Бургер / Заголовок */}
+                <div className="w-full flex justify-between items-center px-6 h-12">
+                    {/* Бургер иконка с анимацией */}
+                    <div className="flex items-center gap-3">
+                        <div className="relative w-8 h-8 flex flex-col justify-center gap-1.5">
+                            <span className={`w-6 h-0.5 bg-black transition-all duration-300 ${open ? 'rotate-45 translate-y-2' : ''}`}></span>
+                            <span className={`w-6 h-0.5 bg-black transition-all duration-300 ${open ? 'opacity-0' : ''}`}></span>
+                            <span className={`w-6 h-0.5 bg-black transition-all duration-300 ${open ? '-rotate-45 -translate-y-2' : ''}`}></span>
+                        </div>
+                        <span className={`text-white font-bold text-lg transition-all duration-300 ${open ? 'opacity-100' : 'opacity-0 hidden'}`}>
+                            {currentUser?.username || 'Admin'}
+                        </span>
                     </div>
-                )}
 
-                <button
-                    onClick={logout}
-                    className="px-6 py-3 bg-gray-800 text-white rounded-lg font-bold hover:bg-gray-900 transition w-full">
-                    Выйти из аккаунта
-                </button>
-            </div>
-        </div>
+                    {/* Индикатор статуса */}
+                    <div className={`flex items-center gap-2 transition-all duration-300 ${open ? 'opacity-0' : 'opacity-100'}`}>
+                        <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                        <span className="text-white text-sm font-medium">Admin</span>
+                    </div>
+                </div>
+
+                {/* ВЫПАДАЮЩЕЕ МЕНЮ */}
+                <div className={`
+                    overflow-hidden transition-all duration-500 ease-in-out
+                    ${open ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}
+                `}>
+                    <ul className="w-full flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-6 py-4 px-4 border-t border-amber-400/30">
+                        {menuItems.map((item, index) => (
+                            <li 
+                                key={index}
+                                className={`
+                                    transform transition-all duration-300
+                                    ${open ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}
+                                `}
+                                style={{ transitionDelay: `${index * 50}ms` }}
+                            >
+                                {item.action ? (
+                                    <button 
+                                        onClick={(e) => { e.stopPropagation(); item.action!(); setOpen(false); }}
+                                        className="flex items-center gap-2 text-white hover:text-black transition-colors duration-200 px-4 py-2 rounded-lg hover:bg-white/20"
+                                    >
+                                        <span className="text-xl">{item.icon}</span>
+                                        <span className="font-medium">{item.label}</span>
+                                    </button>
+                                ) : (
+                                    <a 
+                                        href={item.href}
+                                        className="flex items-center gap-2 text-white hover:text-black transition-colors duration-200 px-4 py-2 rounded-lg hover:bg-white/20"
+                                    >
+                                        <span className="text-xl">{item.icon}</span>
+                                        <span className="font-medium">{item.label}</span>
+                                    </a>
+                                )}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </nav>
+        </section>
     );
 }

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import timeTable from './timeTable.jpg'
 import price from './price.jpg'
+import videoGame from './game.webp'
 
 export default function Abonement() {
     const [loading, setLoading] = useState(true);
@@ -15,16 +16,16 @@ export default function Abonement() {
             {/* Обёртка-контейнер */}
             <div className='transition-all duration-800'>
                 {/* Flex-контейнер: на мобильных — колонка, на sm+ — строка */}
-                <div className="flex flex-col sm:flex-row gap-8 max-w-6xl mx-auto items-start">
+                <div className="flex flex-col sm:flex-row gap-8 max-w-6xl mx-auto items-center">
                     
                     {/* Текстовая секция */}
                     <div className={`${loading ? 'opacity-0 -translate-x-full' : 'opacity-100 translate-x-0'} transition-all duration-800 ease-in-out flex-1 min-w-0`}>
-                        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-5">
-                            Что входит в программу обучения в нашем спортклубе:
-                        </h1>
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-5">
+                            Что входит в программу <br /> обучения в нашем спортклубе:
+                        </h2>
                         <ul className="space-y-4 text-lg">
                             <li className="font-medium">
-                                TitanVolleyClub - сообщество любителей волейбола. Мы проводим обучение людей классическому и пляжному волейболу любого уровня в возрасте от 16 лет.
+                                TitanVolleyClub - сообщество любителей волейбола. <br /> Мы проводим обучение людей классическому и пляжному волейболу <br /> любого уровня в возрасте от 16 лет.
                             </li>
                             <li>🏐 Игры на профессиональном уровне</li>
                             <li>🏆 Турниры</li>
@@ -51,6 +52,11 @@ export default function Abonement() {
                     </div>
                 </div>
             </div>
+
+            <article>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-12 mb-5 text-center">Получите невероятные эмоции от занятий в нашем клубе!</h2>
+                <img src={videoGame} alt="Видео с тренировки в Titan Volley Club" className="w-full max-w-4xl mx-auto rounded-xl shadow-2xl" />
+            </article>
         </section>
     );
 }

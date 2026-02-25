@@ -21,7 +21,7 @@ interface AuthState {
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
   loadUsers: () => Promise<void>;
-  isAdmin: () => boolean; // удобный геттер
+  isAdmin: () => boolean; 
 }
 
 export const useAuthStore = create<AuthState>()(

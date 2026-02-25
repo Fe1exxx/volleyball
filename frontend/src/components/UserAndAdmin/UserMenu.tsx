@@ -4,7 +4,7 @@ export default function UserMenu() {
     const { logout, users, isAdmin, currentUser } = useAuthStore();
     
     return (
-        <div className="max-w-md mx-auto p-6 bg-white rounded-xl shadow-lg border border-orange-100 mt-10">
+        <div className="max-w-md mx-auto p-6 bg-white rounded-xl shadow-lg border border-orange-500/30 mt-25">
             <div className="text-center py-8">
                 <h2 className="text-3xl font-oswald font-bold text-blue-600 mb-4">Добро пожаловать пользователь!</h2>
                 <p className="text-lg mb-2">

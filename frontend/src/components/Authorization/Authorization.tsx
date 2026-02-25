@@ -15,7 +15,6 @@ export default function Authorization() {
   //Open User menu
   if (isLoggedIn && currentUser?.role === 'user') return <UserMenu />
   
-
   //Autorization menu
   return <Entrance />
 }
