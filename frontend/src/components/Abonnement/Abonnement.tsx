@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react";
 
+
+
 import timeTable from './timeTable.jpg'
 import price from './price.jpg'
-import videoGame from './game.webp'
+
 
 export default function Abonement() {
     const [loading, setLoading] = useState(true);
+
+    
 
     useEffect(() => {
         setLoading(false);
@@ -52,11 +56,6 @@ export default function Abonement() {
                     </div>
                 </div>
             </div>
-
-            <article>
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-12 mb-5 text-center">Получите невероятные эмоции от занятий в нашем клубе!</h2>
-                <img src={videoGame} alt="Видео с тренировки в Titan Volley Club" className="w-full max-w-4xl mx-auto rounded-xl shadow-2xl" />
-            </article>
         </section>
     );
 }
