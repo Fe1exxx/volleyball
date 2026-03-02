@@ -36,7 +36,8 @@ export const useAuthStore = create<AuthState>()(
       login: async (email, password) => {
         set({ loading: true, error: null });
         try {
-          const response = await fetch('http://localhost:3001/api/auth/login', {
+          const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+          const response = await fetch(`${API_URL}/api/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
@@ -73,7 +74,8 @@ export const useAuthStore = create<AuthState>()(
 
       loadUsers: async () => {
         try {
-          const response = await fetch('http://localhost:3001/api/users');
+          const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+          const response = await fetch(`${API_URL}/api/users`);
           if (!response.ok) throw new Error('HTTP Error: ' + response.status);
 
           const rawData = await response.json();
