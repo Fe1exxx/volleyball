@@ -19,7 +19,7 @@ RUN npm add -g tsx
 # Копируем весь код
 COPY . .
 
-COPY .env .env
+#COPY .env .env
 
 # Указываем порт
 EXPOSE 3001
