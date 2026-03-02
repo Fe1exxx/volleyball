@@ -8,14 +8,16 @@ const PORT = process.env.PORT || 3001;
 
 app.use(cors({
   origin: [
-    'http://localhost:5173',  // локальная разработка
-    'https://volleyball-2ded59sks-fexds-projects.vercel.app',  // Vercel домен
-    'https://volleyball-uvuc.onrender.com'  // на всякий случай
+    'http://localhost:5173',
+    'http://localhost:3001',
+    'https://volleyball-fexds-projects.vercel.app',  
+    'https://volleyball-hp2bwnclk-fexds-projects.vercel.app',  
+    'https://volleyball-uvuc.onrender.com'
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
-}))
+}));
 
 app.get('/', (req, res) => {
   res.json({ message: 'Volleyball API ready', endpoints: ['/api/auth/register', '/api/auth/login'] });
