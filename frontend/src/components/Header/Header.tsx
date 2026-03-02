@@ -132,14 +132,13 @@ export default function Header() {
             {isLoggedIn ? (
               <li>
                 <Link
-                  to={'/'}
+                  to={'/authorization'}
                   className="block w-full text-left px-3 py-3 border-b border-black cursor-pointer bg-indigo-600 hover:bg-indigo-800 text-white"
                   onClick={() => {
                     setVisible(!visible);
-                    logout();
                   }}
                 >
-                  Выйти с аккаунта
+                  Профиль
                 </Link>
               </li>
             ) : (
