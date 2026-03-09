@@ -24,7 +24,7 @@ export default function SecondComponentHelloUser() {
 	}, [currentUser]); // Эффект сработает при изменении currentUser
 
 	return (
-		<section className="overflow-hidden absolute right-0">
+		<section className="overflow-hidden absolute right-0 z-999">
 			<div
 				className={`
 					${isVisible ? "translate-x-0" : "translate-x-full"} 
