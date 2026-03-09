@@ -18,13 +18,14 @@ export default function SecondComponentHelloUser() {
 
 			setTimeout(() => {
 				setIsVisible(false);
+				
 			}, 4000);
 		}
 		
 	}, [currentUser]); // Эффект сработает при изменении currentUser
 
 	return (
-		<section className="overflow-hidden absolute right-0 z-999">
+		<section className={`overflow-hidden absolute right-0 ${isVisible ? "z-999" : "z-0"}`}>
 			<div
 				className={`
 					${isVisible ? "translate-x-0" : "translate-x-full"} 
