@@ -12,6 +12,7 @@ import { Home, Tag, User } from 'lucide-react';
 // Images
 import logo from './logo.png';
 
+
 export default function Header() {
 
   // State
@@ -71,10 +72,10 @@ export default function Header() {
           <nav>
             <ul className='hidden sm:flex gap-10 h-15 items-center'>
               <li className='hover:scale-110 duration-200 transition-all cursor-pointer sm:text-2xl md:text-3xl hover:text-amber-400'>
-                <Link to='/' className='flex items-center'>Главная <span className='ml-2 mt-2'>{<Home />}</span></Link>
+                <Link to='/' className='flex items-center wdxl-lubrifont-sc-regular gap-1'>Главная {<Home size={26}/>}</Link>
               </li>
               <li className='hover:scale-110 duration-200 transition-all cursor-pointer sm:text-2xl md:text-3xl hover:text-amber-400'>
-                <Link to='/abonement' className='flex items-center'>Абонемент <span className='ml-2 mt-2'>{<Tag />}</span></Link>
+                <Link to='/abonement' className='flex items-center wdxl-lubrifont-sc-regular gap-1'>Абонемент {<Tag size={24}/>}</Link>
               </li>
 
               {isLoggedIn ? (
@@ -90,8 +91,8 @@ export default function Header() {
                   <div className={` hover:scale-210 transition-all ${profileOpen ? 'scale-210' : 'scale-170'}`}><User /></div>
                 </button>
               ) : (
-                <li className='hover:scale-110 duration-200 transition-all cursor-pointer sm:text-2xl md:text-3xl hover:text-amber-400'>
-                  <Link to='/authorization'>Войти</Link>
+                <li className='hover:scale-110 duration-200 transition-all cursor-pointer sm:text-2xl md:text-3xl hover:text-amber-400 '>
+                  <Link to='/authorization' className='wdxl-lubrifont-sc-regular flex items-center gap-1'>Войти <User size={30}/></Link>
                 </li>
               )}
             </ul>

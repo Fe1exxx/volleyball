@@ -1,26 +1,30 @@
-*{
-    font-family: 'Oswald', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=WDXL+Lubrifont+SC&display=swap');
+
+* {
+    font-family: "Oswald", sans-serif;
 }
 
-
+.wdxl-lubrifont-sc-regular {
+  font-family: "WDXL Lubrifont SC", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
 /* Mobile menu animation */
 .mobile-menu {
-  overflow: hidden;
-  max-height: 0;
-  opacity: 0;
-  transition: 
-    max-height 0.35s ease-in-out,
-    opacity 0.25s ease;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition:
+        max-height 0.35s ease-in-out,
+        opacity 0.25s ease;
 }
 
 .mobile-menu.open {
-  max-height: 500px;
-  opacity: 1;
+    max-height: 500px;
+    opacity: 1;
 }
 
-
-
-button:hover{
-  cursor: pointer;
+button:hover {
+    cursor: pointer;
 }

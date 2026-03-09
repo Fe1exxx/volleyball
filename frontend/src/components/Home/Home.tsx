@@ -26,8 +26,7 @@ export default function Home() {
             <div className="md:flex justify-around items-center max-w-300 m-auto">
                 <header className="text-center md:min-w-110">
                     <h1
-                        className={`${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-full"} transition-all duration-700 delay-300 ease-out text-3xl max-w-100 m-auto font-semibold font-mono mt-3 md:m-0 md:text-left lg:text-5xl lg:max-w-170`}
-                    >
+                        className={`${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-full"} transition-all duration-700 delay-300 ease-out text-3xl max-w-100 m-auto font-semibold font-mono mt-3 md:m-0 md:text-left lg:text-5xl lg:max-w-170`}>
                         Волейбол — это не просто игра. Это твой{" "}
                         <b className="text-amber-700">TITAN!</b>
                     </h1>
@@ -36,8 +35,7 @@ export default function Home() {
                             isVisible
                                 ? "opacity-100 translate-x-0"
                                 : "opacity-0 -translate-x-full"
-                        } transition-all duration-700 delay-400 ease-out text-2xl font-semibold font-mono mt-3 text-center md:text-left  lg:text-3xl`}
-                    >
+                        } transition-all duration-700 delay-400 ease-out text-2xl font-semibold font-mono mt-3 text-center md:text-left  lg:text-3xl`}>
                         Самое важное правило волейбола -<br />
                         не бойся начать играть!
                     </p>
@@ -48,13 +46,11 @@ export default function Home() {
                         isVisible
                             ? "opacity-100 translate-x-0"
                             : "opacity-0 translate-x-full"
-                    } transition-all duration-700 delay-500 ease-out flex flex-col sm:flex-row justify-center items-center m-auto md:block md:m-0`}
-                >
+                    } transition-all duration-700 delay-500 ease-out flex flex-col sm:flex-row justify-center items-center m-auto md:block md:m-0`}>
                     <img
                         src="https://i.pinimg.com/736x/51/3f/11/513f11f42fc1005d8decaba522ddc386.jpg"
                         alt="volleyball-man"
-                        className="w-[90%] max-w-100"
-                    />
+                        className="w-[90%] max-w-100"/>
                 </section>
 
             </div>
@@ -67,8 +63,7 @@ export default function Home() {
                         images={sliderImages}
                         autoPlayInterval={3000}
                         height="h-[300px] md:h-[400px] lg:h-[500px]"
-                        className="max-w-4xl mx-auto"
-                    />
+                        className="max-w-4xl mx-auto"/>
                 </article>
         </section>
     );

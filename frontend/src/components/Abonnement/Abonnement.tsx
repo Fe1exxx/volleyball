@@ -43,13 +43,13 @@ export default function Abonement() {
                     <div className={`${loading ? 'opacity-0  translate-x-full' : 'opacity-100 translate-x-0'} flex flex-col gap-4 items-center sm:items-start shrink-0 transition-all duration-800 ease-in-out`}>
                         <img
                             src={timeTable}
-                            className="w-60 sm:w-70 md:w-80 rounded-xl shadow-2xl object-cover aspect-square"
+                            className="w-60 sm:w-70 md:w-87 rounded-xl shadow-2xl object-cover aspect-square"
                             alt="Матч Titan Volley Club на открытой площадке"
                             loading="lazy"
                         />
                         <img
                             src={price}
-                            className="w-60 sm:w-70 md:w-80 rounded-xl shadow-2xl object-cover aspect-square"
+                            className="w-60 sm:w-70 md:w-87 rounded-xl shadow-2xl object-cover aspect-square"
                             alt="Групповая тренировка Titan Volley Club"
                             loading="lazy"
                         />

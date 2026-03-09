@@ -2,7 +2,7 @@
 import { useAuthStore } from '../../GlobalSetZustand/authStore';
 
 // Components
-import UserMenu from '../UserAndAdmin/UserMenu';
+import UserMenu from '../UserAndAdmin/UserMenu/UserMenu';
 import AdminMenu from '../UserAndAdmin/AdminMenu'; 
 import Entrance from './Entrance';
 
