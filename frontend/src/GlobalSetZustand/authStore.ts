@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware';
 import { z } from 'zod';
 
 const userSchema = z.object({
-  id: z.number(),
+  id: z.string().uuid(),
   username: z.string(),
   email: z.string().email(),
   role: z.enum(['user', 'admin']), // строгий enum
@@ -17,6 +17,7 @@ interface AuthState {
   users: User[];
   loading: boolean;
   error: string | null;
+
 
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
