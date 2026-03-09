@@ -1,8 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { 
   Calendar, Clock, MapPin, Users, Trophy, Dumbbell, 
-  ChevronRight, Filter, Search, CheckCircle2, XCircle,
-  TrendingUp, Activity, Award, User
+   Search, CheckCircle2,TrendingUp, Activity, Award, User
 } from 'lucide-react';
 
 // Типы данных
