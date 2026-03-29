@@ -54,7 +54,7 @@ interface UserStats {
 }
 
 const UserDashboard: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'trainings' | 'tournaments' | 'my'>('trainings');
+  const [activeTab , setActiveTab] = useState<'trainings' | 'tournaments' | 'my'>('trainings');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedLevel, setSelectedLevel] = useState<string>('all');
   const [selectedType, setSelectedType] = useState<string>('all');
