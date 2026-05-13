@@ -2,7 +2,7 @@
 
 > A fullstack web application for managing memberships, schedules, and user accounts for a volleyball club.
 
-**Live demo:** [volleyball-sepia.vercel.app](https://volleyball-sepia.vercel.app)
+**Live demo:** [volleyball-sepia.vercel.app](https://volleyball-gdwpv9he9-fexds-projects.vercel.app)
 
 ---
 
